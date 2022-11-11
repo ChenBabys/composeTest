@@ -1,4 +1,4 @@
-package com.tanle.composetest.ui.theme.bean
+package com.tanle.composetest.ui.bean
 
 import androidx.annotation.DrawableRes
 

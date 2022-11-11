@@ -1,4 +1,4 @@
-package com.tanle.composetest.ui.theme
+package com.tanle.composetest.ui.custom_view
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
@@ -17,7 +17,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.tanle.composetest.ui.theme.bean.Message
+import com.tanle.composetest.ui.bean.Message
 
 /**
  * 绘制的图
