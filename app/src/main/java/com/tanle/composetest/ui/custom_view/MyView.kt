@@ -1,6 +1,8 @@
 package com.tanle.composetest.ui.custom_view
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -15,14 +17,61 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.compose.ui.window.Dialog
 import com.tanle.composetest.ui.bean.Message
+import com.tanle.composetest.ui.bean.Share
 
 /**
  * 绘制的图
  */
 object MyView {
+    /**
+     * 每项icon的view
+     */
+    @Composable
+    fun ShareCard(share: Share, modifier: Modifier) {
+        Surface(//有它才可以实现列表的间距
+            modifier = Modifier.padding(10.dp, 5.dp),
+            shadowElevation = 1.dp,
+            shape = RoundedCornerShape(5.dp)
+        ) {
+            ImageIcon(share, modifier)
+        }
+    }
+
+    /**
+     * 图标+文字的组合icon
+     *
+     */
+    @Composable
+    fun ImageIcon(share: Share, modifier: Modifier) {
+        Column(
+            modifier = modifier
+                .width(60.dp)
+                .height(80.dp)
+                .padding(all = 8.dp)
+        ) {
+            Image(
+                painter = painterResource(id = share.imgInt),
+                contentDescription = "",
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(all = 8.dp),
+                alignment = Alignment.Center
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = share.name,
+                color = MaterialTheme.colorScheme.secondary,
+                style = MaterialTheme.typography.bodyMedium
+            )
+        }
+    }
 
     @Composable
     fun MessageCard(msg: Message) {
