@@ -1,5 +1,7 @@
 package com.tanle.composetest
 
+import android.content.Context
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -14,9 +16,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.tanle.composetest.ui.theme.ComposeTestTheme
-import com.tanle.composetest.ui.custom_view.MyView
 import com.tanle.composetest.ui.bean.Message
 import com.tanle.composetest.ui.bean.Share
+import com.tanle.composetest.ui.custom_view.MessageCard
+import com.tanle.composetest.ui.custom_view.MineScaffold
+import com.tanle.composetest.ui.custom_view.ShareCard
 import com.tanle.composetest.ui.utils.DataUtil
 
 class MainActivity : ComponentActivity() {
@@ -29,46 +33,51 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+                        MineScaffold()
 //                    Conversation(DataUtil.getMessageList())
-                    ShareDialog(DataUtil.getShareIconList(),Modifier)
+//                    ShareDialog(DataUtil.getShareIconList(),Modifier,this)
                 }
             }
         }
     }
 }
-
-/**
- * 对话
- */
-@Composable
-fun Conversation(messages: List<Message>) {
-    LazyColumn {//这玩意就相当于recycleView
-        items(messages) { message ->
-            MyView.MessageCard(msg = message)
+    /**
+     * 对话
+     */
+    @Composable
+    fun Conversation(messages: List<Message>) {
+        LazyColumn {//这玩意就相当于recycleView
+            items(messages) { message ->
+                MessageCard(msg = message)
+            }
         }
     }
-}
 
-/**
- * 分享弹框
- */
-@Composable
-fun ShareDialog(shareItem: List<Share>,modifier: Modifier) {
-    LazyRow(modifier = modifier
-        .fillMaxSize()
-        .padding(4.dp, 25.dp, 4.dp, 0.dp)) {
-        items(shareItem) { item: Share ->
-            MyView.ShareCard(share = item,modifier)
+    /**
+     * 分享弹框
+     */
+    @Composable
+    fun ShareDialog(shareItem: List<Share>,modifier: Modifier,context: Context) {
+        LazyRow(modifier = modifier
+            .fillMaxSize()
+            .padding(4.dp, 25.dp, 4.dp, 0.dp)) {
+            items(shareItem) { item: Share ->
+                ShareCard(share = item,modifier,context)
+            }
         }
     }
-}
 
 
-@Preview(showBackground = true)
+
+
+@Preview("default")
+@Preview("dark theme", uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Preview("large font", fontScale = 2f)
 @Composable
 fun DefaultPreview() {
     ComposeTestTheme {
+        MineScaffold()
 //        Conversation(DataUtil.getMessageList())
-        ShareDialog(DataUtil.getShareIconList(),Modifier)
+//        ShareDialog(DataUtil.getShareIconList(),Modifier,this)
     }
 }
