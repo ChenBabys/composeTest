@@ -41,15 +41,19 @@ fun MineScaffold() {
                         onClick = {
                             currentIndex = index
                         }, icon = {
-                            Icon(
-                                imageVector = when (index) {
-                                    0 -> Icons.Default.Favorite
-                                    1 -> Icons.Default.AccountCircle
-                                    2 -> Icons.Default.AccountBox
-                                    3 -> Icons.Default.Face
-                                    else -> Icons.Default.AccountBox
-                                }, contentDescription = null
-                            )
+                            BadgedBox(badge = {
+                                Text(text = "99+")
+                            }) {
+                                Icon(
+                                    imageVector = when (index) {
+                                        0 -> Icons.Default.Favorite
+                                        1 -> Icons.Default.AccountCircle
+                                        2 -> Icons.Default.AccountBox
+                                        3 -> Icons.Default.Face
+                                        else -> Icons.Default.AccountBox
+                                    }, contentDescription = null
+                                )
+                            }
                         }, label = {
                             Text(text = s)
                         })
